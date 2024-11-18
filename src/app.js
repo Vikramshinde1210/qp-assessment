@@ -1,4 +1,8 @@
 const express = require('express');
+const dotenv = require('dotenv')
+const path = require('path')
+
+dotenv.config({ path: `${path.resolve(__dirname, "../.env")}`})
 
 const app = express();
 app.use(express.json());
@@ -16,7 +20,7 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({ success: false, message: err.message || 'Error From Server' });
 });
 
-app.listen(3000, () => {
-  console.log(`Server running on port 3000`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
 });
 
